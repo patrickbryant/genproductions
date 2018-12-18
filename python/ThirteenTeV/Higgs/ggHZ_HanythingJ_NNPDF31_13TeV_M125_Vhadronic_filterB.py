@@ -9,7 +9,7 @@ externalLHEProducer = cms.EDProducer("ExternalLHEProducer",
                                      )
 
 lheGenericFilter = cms.EDFilter("LHEGenericFilter",
-                                src = cms.InputTag("externalLHEProducer"),
+                                src = cms.InputTag("ExternalLHEProducer"),
                                 NumRequired = cms.int32(1),
                                 ParticleID = cms.vint32(5),
                                 AcceptLogic = cms.string("GT"),     # LT meaning < NumRequired, GT >, EQ =, NE !=
@@ -50,4 +50,4 @@ generator = cms.EDFilter("Pythia8HadronizerFilter",
                                                      )
                          )
 
-ProductionFilterSequence = cms.Sequence(generator)
+ProductionFilterSequence = cms.Sequence(lheGenericFilter*generator)
