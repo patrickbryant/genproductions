@@ -1,5 +1,8 @@
 import FWCore.ParameterSet.Config as cms
 
+#link for cards
+#https://github.com/patrickbryant/genproductions/blob/master/bin/Powheg/production/2017/13TeV/Higgs/ggHZ_HanythingJ_NNPDF31_13TeV/ggHZ_HanythingJ_NNPDF31_13TeV_M125_Vhadronic.input
+
 externalLHEProducer = cms.EDProducer("ExternalLHEProducer",
                                      args = cms.vstring('/afs/cern.ch/user/p/pbryant/public/ggHZ_HanythingJ_NNPDF31_13TeV_M125_Vleptonic/v1/ggHZ_HanythingJ_NNPDF31_13TeV_M125_Vhadronic_filterB.tgz'),
                                      nEvents = cms.untracked.uint32(5000),
@@ -9,20 +12,17 @@ externalLHEProducer = cms.EDProducer("ExternalLHEProducer",
                                      )
 
 lheGenericFilter = cms.EDFilter("LHEGenericFilter",
-                                src = cms.InputTag("ExternalLHEProducer"),
+                                src = cms.InputTag("externalLHEProducer"),
                                 NumRequired = cms.int32(1),
                                 ParticleID = cms.vint32(5),
                                 AcceptLogic = cms.string("GT"),     # LT meaning < NumRequired, GT >, EQ =, NE !=
                                 )
 
-#link for cards
-#https://github.com/patrickbryant/genproductions/blob/master/bin/Powheg/production/2017/13TeV/Higgs/ggHZ_HanythingJ_NNPDF31_13TeV/ggHZ_HanythingJ_NNPDF31_13TeV_M125_Vhadronic.input
-
 import FWCore.ParameterSet.Config as cms
 from Configuration.Generator.Pythia8CommonSettings_cfi import *
 from Configuration.Generator.MCTunes2017.PythiaCP5Settings_cfi import *
-from Configuration.Generator.PSweightsPythia.PythiaPSweightsSettings_cfi import *
 from Configuration.Generator.Pythia8PowhegEmissionVetoSettings_cfi import *
+from Configuration.Generator.PSweightsPythia.PythiaPSweightsSettings_cfi import *
 
 generator = cms.EDFilter("Pythia8HadronizerFilter",
                          maxEventsToPrint = cms.untracked.int32(1),
