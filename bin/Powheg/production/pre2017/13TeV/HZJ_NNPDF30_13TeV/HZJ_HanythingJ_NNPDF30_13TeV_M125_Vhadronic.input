@@ -57,8 +57,8 @@ iseed    SEED        !  Start the random number generator with seed iseed
 xgriditeration 1
 fastbtlbound 1
 
-storeinfo_rwgt 0   ! store info to allow for reweighting
-pdfreweight 0
+! storeinfo_rwgt 0   ! store info to allow for reweighting
+pdfreweight 1
 
 
 
